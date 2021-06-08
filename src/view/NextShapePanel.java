@@ -4,9 +4,12 @@ import java.awt.Graphics;
 import java.util.Observable;
 import java.util.Observer;
 
-import factory.Shape;
+import javax.swing.JPanel;
 
-public class NextShapePanel implements Observer {
+import factory.Shape;
+import model.Game;
+
+public class NextShapePanel extends JPanel implements Observer {
 	private Shape nextShape;
 	private IView view;
 
@@ -17,6 +20,14 @@ public class NextShapePanel implements Observer {
 
 	@Override
 	public void update(Observable o, Object arg) {
-		
+		if(o instanceof Game) {
+			Game game = (Game) o;
+			nextShape = game.getNextShape();
+		}
+	}
+	
+	@Override
+	protected void paintComponent(Graphics g) {
+		super.paintComponent(g);
 	}
 }

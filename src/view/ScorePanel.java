@@ -4,7 +4,9 @@ import java.awt.Graphics;
 import java.util.Observable;
 import java.util.Observer;
 
-public class ScorePanel implements Observer{
+import javax.swing.JPanel;
+
+public class ScorePanel extends JPanel implements Observer{
 	private IView view;
 
 	public ScorePanel(IView view, Observable observable) {

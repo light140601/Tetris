@@ -4,9 +4,11 @@ import java.awt.Graphics;
 import java.util.Observable;
 import java.util.Observer;
 
+import javax.swing.JPanel;
+
 import factory.Shape;
 
-public class BoardGamePanel implements Observer{
+public class BoardGamePanel extends JPanel implements Observer{
 	private int[][] board;
 	private Shape currentShape;
 	private IView view;

@@ -1,10 +1,12 @@
 package model;
 
 import java.awt.Graphics;
+import java.util.Observable;
 
+import factory.Shape;
 import factory.ShapeRandomFactory;
 
-public class Game implements IGame {
+public class Game extends Observable implements IGame {
 	private int[][] board;
 	private int tileSize; // kich thuoc tung khoi
 	private boolean pause;
@@ -60,50 +62,12 @@ public class Game implements IGame {
 	}
 
 	@Override
-	public void left() {
-		// TODO Auto-generated method stub
-		
+	public Shape getNextShape() {
+		return null;
 	}
 
 	@Override
-	public void right() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void down() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setNormalSpeed() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void rotate() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void pause() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void resume() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void restart() {
-		// TODO Auto-generated method stub
-		
+	public Shape getCurrentShape() {
+		return null;
 	}
 }

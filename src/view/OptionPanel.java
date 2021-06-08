@@ -5,8 +5,9 @@ import java.util.Observable;
 import java.util.Observer;
 
 import javax.swing.JButton;
+import javax.swing.JPanel;
 
-public class OptionPanel implements Observer{
+public class OptionPanel extends JPanel implements Observer{
 	private IView view;
 	private JButton restart;
 	private JButton pause;
