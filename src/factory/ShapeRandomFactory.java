@@ -1,15 +1,39 @@
 package factory;
 
+import java.util.Random;
+
 import model.IGame;
 
 public class ShapeRandomFactory {
 
 	public Shape creatShape(char type, int size, IGame boardGame) {
 		//insert code
-		return null;
+		char result = this.creatShapeRandom();
+		switch (result) {
+		case 'J':
+			return new ShapeJ();
+			break;
+		case 'L':
+			return new ShapeL();
+		case 'O':
+			return new ShapeO();
+		case 'S':
+			return new ShapeS();
+		case 'T':
+			return new ShapeT();
+		case 'Z':
+			return new ShapeZ();
+
+		default:
+			break;
+		}
+		
 	}
-	public Shape creatShapeRandom(char type, int size,IGame boardGame) {
+	public char creatShapeRandom() {
 		//insert code
-		return null;
+		char[] icons = {'J', 'L', 'O', 'S', 'T', 'Z'};
+		Random r = new Random();
+		int index = r.nextInt(icons.length);
+		return icons[index];
 	}
 }
