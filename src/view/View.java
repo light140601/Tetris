@@ -1,38 +1,48 @@
 package view;
 
-import java.awt.event.KeyEvent;
+import java.util.Observable;
+
+import javax.swing.JFrame;
 
 import controller.IController;
 
-public class View implements IView{
+public class View extends JFrame implements IView{
 	private IController controller;
 	private BoardGamePanel boardGamePn;
 	private ScorePanel scorePn;
 	private OptionPanel optionPn;
-
-	public void keyPressed(KeyEvent e) {
-		// insert code
-	}
-
-	public void keyReleased(KeyEvent e) {
-		// insert code
+	
+	public View(IController controller, Observable observable) {
+		this.controller = controller;
+		boardGamePn = new BoardGamePanel(this, observable);
+		init();
 	}
 
 	@Override
-	public void pause() {
-		// TODO Auto-generated method stub
+	public void init() {
 		
+		setSize(1280,860);
+		setVisible(true);
+		setLocationRelativeTo(null);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	}
+	
+	@Override
+	public void pause() {
+		controller.pause();
 	}
 
 	@Override
 	public void resume() {
-		// TODO Auto-generated method stub
-		
+		controller.resume();
 	}
 
 	@Override
 	public void restart() {
-		// TODO Auto-generated method stub
-		
+		controller.restart();
+	}
+
+	public static void main(String[] args) {
+		new View(null, null);
 	}
 }

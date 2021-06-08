@@ -2,13 +2,18 @@ package view;
 
 import java.awt.Graphics;
 import java.util.Observable;
+import java.util.Observer;
 
-public class ScorePanel {
-	public void update(Observable o, Object obj) {
-		// insert code
+public class ScorePanel implements Observer{
+	private IView view;
+
+	public ScorePanel(IView view, Observable observable) {
+		this.view = view;
+		observable.addObserver(this);
 	}
 
-	public void paintComponent(Graphics g) {
-		// insert code
+	@Override
+	public void update(Observable o, Object arg) {
+		
 	}
 }

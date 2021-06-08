@@ -1,10 +1,9 @@
 package view;
 
 public interface IView {
-	public void pause();
-
-	public void resume();
-
-	public void restart();
-
+	//khoi tao swing
+	public void init();
+	public void pause();//tam dung
+	public void resume();//tiep tuc
+	public void restart();//choi lai
 }
