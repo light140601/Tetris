@@ -9,25 +9,25 @@ public class ShapeRandomFactory {
 	public Shape creatShape(char type, int size, IGame boardGame) {
 		//insert code
 		char result = this.creatShapeRandom();
-		switch (result) {
-		case 'J':
-			return new ShapeJ();
-			break;
-		case 'L':
-			return new ShapeL();
-		case 'O':
-			return new ShapeO();
-		case 'S':
-			return new ShapeS();
-		case 'T':
-			return new ShapeT();
-		case 'Z':
-			return new ShapeZ();
-
-		default:
-			break;
-		}
+//		switch (result) {
+//		case 'J':
+//			return new ShapeJ();
+//		case 'L':
+//			return new ShapeL();
+//		case 'O':
+//			return new ShapeO();
+//		case 'S':
+//			return new ShapeS();
+//		case 'T':
+//			return new ShapeT();
+//		case 'Z':
+//			return new ShapeZ();
+//
+//		default:
+//			break;
+//		}
 		
+		return null;
 	}
 	public char creatShapeRandom() {
 		//insert code

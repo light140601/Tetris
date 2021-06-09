@@ -17,6 +17,10 @@ public class NextShapePanel extends JPanel implements Observer {
 		this.view = view;
 		observable.addObserver(this);
 	}
+	
+	public void init() {
+		
+	}
 
 	@Override
 	public void update(Observable o, Object arg) {
