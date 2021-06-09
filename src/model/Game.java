@@ -24,50 +24,47 @@ public class Game extends Observable implements IGame {
 		return null;
 	}
 
-	@Override
 	public void init() {
 		// TODO Auto-generated method stub
 		System.out.println(123);
 		
 	}
 
-	@Override
 	public void update() {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
 	public void draw(Graphics g) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
 	public void setNextShape() {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
 	public void setCurrentShape() {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
 	public void checkLine() {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
 	public Shape getNextShape() {
 		return null;
 	}
 
-	@Override
 	public Shape getCurrentShape() {
 		return null;
 	}
+
+	public int[][] getBoard() {
+		return board;
+	}
+	
 }

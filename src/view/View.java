@@ -30,7 +30,6 @@ public class View extends JFrame implements IView {
 		init();
 	}
 
-	@Override
 	public void init() {
 		setLayout(new BorderLayout(10, 10));
 		add(boardGamePn, BorderLayout.CENTER);
@@ -47,17 +46,14 @@ public class View extends JFrame implements IView {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
-	@Override
 	public void pause() {
 		controller.pause();
 	}
 
-	@Override
 	public void resume() {
 		controller.resume();
 	}
 
-	@Override
 	public void restart() {
 		controller.restart();
 	}

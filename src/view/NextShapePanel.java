@@ -18,7 +18,6 @@ public class NextShapePanel extends JPanel implements Observer {
 		observable.addObserver(this);
 	}
 
-	@Override
 	public void update(Observable o, Object arg) {
 		if(o instanceof Game) {
 			Game game = (Game) o;

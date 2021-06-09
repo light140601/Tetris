@@ -18,7 +18,6 @@ public class BoardGamePanel extends JPanel implements Observer{
 		observable.addObserver(this);
 	}
 
-	@Override
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
 		

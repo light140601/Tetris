@@ -6,13 +6,12 @@ import model.IGame;
 
 public class ShapeRandomFactory {
 
-	public Shape creatShape(char type, int size, IGame boardGame) {
+	public Shape creatShape(int x, int y, int size) {
 		//insert code
 		char result = this.creatShapeRandom();
 		switch (result) {
 		case 'J':
 			return new ShapeJ();
-			break;
 		case 'L':
 			return new ShapeL();
 		case 'O':
@@ -27,6 +26,7 @@ public class ShapeRandomFactory {
 		default:
 			break;
 		}
+		return null;
 		
 	}
 	public char creatShapeRandom() {
@@ -35,5 +35,8 @@ public class ShapeRandomFactory {
 		Random r = new Random();
 		int index = r.nextInt(icons.length);
 		return icons[index];
+	}
+	public static void main(String[] args) {
+		
 	}
 }

@@ -14,7 +14,6 @@ public class ScorePanel extends JPanel implements Observer{
 		observable.addObserver(this);
 	}
 
-	@Override
 	public void update(Observable o, Object arg) {
 		
 	}
