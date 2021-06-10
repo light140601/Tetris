@@ -7,52 +7,93 @@ import factory.Shape;
 import factory.ShapeRandomFactory;
 
 public class Game extends Observable implements IGame {
+	// game là model trong mvc, là observable của view
+
 	private int[][] board;
 	private int tileSize; // kich thuoc tung khoi
-	private boolean pause;
 	private boolean gameOver;
+	private Shape currentShape;
+	private boolean running = true;
+	private boolean pause = false;
+	private final Object pauseLock = new Object(); // pause
 
-	public Game(int[][] board, int tileSize, boolean pause, boolean gameOver) {
-		this.board = board;
-		this.tileSize = tileSize;
-		this.pause = pause;
-		this.gameOver = gameOver;
+
+	public Game() {
 	}
 
 	public ShapeRandomFactory shapeRandomFactory() {
-		// insert code
+
 		return null;
+
+//		return new ShapeRandomFactory();
+
 	}
 
 	public void init() {
-		// TODO Auto-generated method stub
-		System.out.println(123);
-		
+
+//		currentShape = this.shapeRandomFactory().creatShape('?', tileSize, this);		
+
 	}
 
 	public void update() {
-		// TODO Auto-generated method stub
-		
+
+		currentShape.update();
+		// update cho observer
+		super.setChanged();
+		super.notifyObservers();
+
 	}
 
 	public void draw(Graphics g) {
-		// TODO Auto-generated method stub
-		
+
+		while (running) {
+			update();
+			try {
+				// draw board
+				for (int row = 0; row < board.length; row++) {
+					for (int col = 0; col < board[col].length; col++) {
+						g.drawRect(row * tileSize, col * tileSize, tileSize, tileSize); // vẽ ô vuông
+					}
+				}
+
+				// pause game
+				if (pause) {
+					try {
+						pauseLock.wait();
+					} catch (InterruptedException ex) {
+						System.out.println("bug");
+					}
+				}
+
+				// draw shape
+				currentShape.draw(g);
+				Thread.sleep(500);
+
+				// ........
+			} catch (InterruptedException e) {
+				System.out.println("bug");
+			}
+		}
+
 	}
 
 	public void setNextShape() {
-		// TODO Auto-generated method stub
-		
+
+//		currentShape = shapeRandomFactory().creatShape('?', tileSize, this);
+	
+
 	}
 
 	public void setCurrentShape() {
-		// TODO Auto-generated method stub
-		
+
+		// ...
+
 	}
 
 	public void checkLine() {
-		// TODO Auto-generated method stub
-		
+
+		// ...
+
 	}
 
 	public Shape getNextShape() {
@@ -60,11 +101,22 @@ public class Game extends Observable implements IGame {
 	}
 
 	public Shape getCurrentShape() {
-		return null;
+		return this.currentShape;
 	}
+	
+	public void pause() {
+		pause=!pause;
+	}
+
+	
 
 	public int[][] getBoard() {
 		return board;
+	}
+
+	public int getTileSize() {
+		// TODO Auto-generated method stub
+		return this.tileSize;
 	}
 	
 }

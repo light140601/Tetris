@@ -2,11 +2,13 @@ package factory;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
 
 import model.IGame;
 
 public abstract class Shape {
 	protected Color color;
+	protected int colorFlag;
 	protected int x;
 	protected int y;
 	protected int[][] coords;
@@ -18,12 +20,15 @@ public abstract class Shape {
 	protected boolean collision = false;
 	protected boolean moveX;
 	protected IGame boarGame;
+	protected long time, lastTime;
 
 	public Shape(int x, int y, int size) {
 		// TODO Auto-generated constructor stub
 		this.currentSpeed = this.normalSpeed;
 		this.x = 4;
 		this.y = 0;
+		time = 0;
+		lastTime = 0;
 
 	}
 
@@ -32,9 +37,73 @@ public abstract class Shape {
 		this.currentSpeed = this.normalSpeed;
 		this.x = 4;
 		this.y = 0;
+		time = 0;
+		lastTime = 0;
+	}
+
+	//
+	public void init() {
+
 	}
 
 	public abstract void create();
+
+	public abstract void draw(Graphics g);
+
+	// main
+	public void update() {
+		// insert code
+		time += System.currentTimeMillis() - lastTime;
+		lastTime = System.currentTimeMillis();
+		// đụng tường dưới r coi có ấy ko
+		if (collision) {
+			for (int row = 0; row < coords.length; row++) {
+				for (int col = 0; col < coords[row].length; col++) {
+					if (coords[row][col] != 0) {
+						this.boarGame.getBoard()[y + row][x + col] = colorFlag;
+					}
+				}
+			}
+			this.check();
+			this.boarGame.setNextShape();
+		}
+		// nếu đã có shape r ko đc move r xếp chồng lên
+		if (!(x + this.detalX + coords[0].length > 10) && !(x + this.detalX < 0)) {
+			for (int row = 0; row < coords.length; row++) {
+				for (int col = 0; col < coords[row].length; col++) {
+					if (coords[row][col] != 0) {
+						if (this.boarGame.getBoard()[y + row][x + this.detalX + col] != 0) {
+							this.moveX = false;
+						}
+					}
+				}
+			}
+			if (moveX) {
+				x += this.detalX;
+			}
+		}
+		// full y
+		if (!(y + 1 + coords.length > 20)) {
+			for (int row = 0; row < coords.length; row++) {
+				for (int col = 0; col < coords[row].length; col++) {
+					if (coords[row][col] != 0) {
+						if (this.boarGame.getBoard()[y + row + 1][col + x] != 0) {
+							collision = true;
+						}
+					}
+				}
+			}
+			if (time > currentSpeed) {
+				y++;
+				time = 0;
+			}
+		} else {
+			collision = true;
+		}
+
+		this.detalX = 0;
+		moveX = true;
+	}
 
 	// chuyển đổi
 	public void rotate() {
@@ -45,12 +114,12 @@ public abstract class Shape {
 			int[][] temp = null;
 			temp = this.transpose(coords);
 			temp = this.reverse(temp);
-			if(x + temp[0].length > 10 || y + temp.length > 20) {
+			if (x + temp[0].length > 10 || y + temp.length > 20) {
 				return;
 			}
 			for (int row = 0; row < temp.length; row++) {
 				for (int col = 0; col < temp.length; col++) {
-					if(this.boarGame.getBoard()[y+col][x+col] != 0) {
+					if (this.boarGame.getBoard()[y + col][x + col] != 0) {
 						return;
 					}
 				}
@@ -60,19 +129,6 @@ public abstract class Shape {
 
 	}
 
-	public void init() {
-		// insert code
-	}
-
-	// main
-	public void update() {
-		// insert code
-	}
-
-	// vẽ mỗi cái 1 màu ??
-	public void draw(Graphics g) {
-		// insert code
-	}
 	// kieemr tra xong r bien mat
 	public void check() {
 		int height = this.boarGame.getBoard().length - 1;

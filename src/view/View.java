@@ -10,6 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import controller.IController;
+import model.Game;
 
 public class View extends JFrame implements IView {
 	private IController controller;
@@ -40,7 +41,7 @@ public class View extends JFrame implements IView {
 		rightPn.add(scorePn);
 		rightPn.add(optionPn);
 
-		setSize(1280, 860);
+		pack();
 		setVisible(true);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -59,6 +60,6 @@ public class View extends JFrame implements IView {
 	}
 
 	public static void main(String[] args) {
-		new View(null, null);
+		new View(null, new Game());
 	}
 }

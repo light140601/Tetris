@@ -1,2 +1,6 @@
 eclipse.preferences.version=1
+<<<<<<< HEAD
 encoding//src/factory/Shape.java=UTF-8
+=======
+encoding//src/model/Game.java=UTF-8
+>>>>>>> 9dd4293ceb57d3080140eae76eefda30d63f7e4d
