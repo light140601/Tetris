@@ -11,32 +11,21 @@ public class Game extends Observable implements IGame {
 
 	private int[][] board;
 	private int tileSize; // kich thuoc tung khoi
-	private boolean gameOver;
 	private Shape currentShape;
-	private boolean running = true;
+	private Shape nextShape;
 	private boolean pause = false;
-	private final Object pauseLock = new Object(); // pause
-
+	private boolean gameOver;
 
 	public Game() {
-	}
-
-	public ShapeRandomFactory shapeRandomFactory() {
-
-		return null;
-
-//		return new ShapeRandomFactory();
-
+		board = new int[20][15];
+		tileSize = 45;
 	}
 
 	public void init() {
-
-//		currentShape = this.shapeRandomFactory().creatShape('?', tileSize, this);		
-
+		// currentShape = new ShapeRandomFactory().creatShape(0, 0, tileSize); 
 	}
 
 	public void update() {
-
 		currentShape.update();
 		// update cho observer
 		super.setChanged();
@@ -45,78 +34,71 @@ public class Game extends Observable implements IGame {
 	}
 
 	public void draw(Graphics g) {
+		currentShape.draw(g);
+		update();
+		// ...
+	}
 
-		while (running) {
-			update();
-			try {
-				// draw board
-				for (int row = 0; row < board.length; row++) {
-					for (int col = 0; col < board[col].length; col++) {
-						g.drawRect(row * tileSize, col * tileSize, tileSize, tileSize); // vẽ ô vuông
-					}
+	public void setNextShape() {
+		// tạo sẵn shape tiếp theo
+		nextShape = new ShapeRandomFactory().creatShape(0, 0, tileSize);
+		// check còn tạo shape mới dc ko
+		for (int row = 0; row < currentShape.getCoords().length; row++) {
+			for (int col = 0; col < currentShape.getCoords()[row].length; col++) {
+				if (currentShape.getCoords()[row][col] != 0) {
+					if (board[row][col + 3] != 0) // +3
+						gameOver = true;
 				}
-
-				// pause game
-				if (pause) {
-					try {
-						pauseLock.wait();
-					} catch (InterruptedException ex) {
-						System.out.println("bug");
-					}
-				}
-
-				// draw shape
-				currentShape.draw(g);
-				Thread.sleep(500);
-
-				// ........
-			} catch (InterruptedException e) {
-				System.out.println("bug");
 			}
+		}
+	}
+
+	public void setCurrentShape() {
+		currentShape = nextShape;
+		this.setNextShape();
+	}
+
+	public void checkLine() {
+		// khi 1 hàng đầy thì hàng đó sẽ bị bỏ đi
+		int height = board.length - 1;
+		for (int row = height; row > 0; row--) {
+			int count = 0;
+			for (int col = 0; col < board[0].length; col++) {
+				if (board[row][col] != 0) {
+					count++;
+				}
+				board[height][col] = board[row][col]; // (1*) nếu hàng đầy thì sẽ bị thay thế bởi hàng trên
+			}
+			if (count < board[0].length)
+				height--; // hàng chưa đầy nên tiếp tục đếm lên hàng trên
+			// else (1*)
 		}
 
 	}
 
-	public void setNextShape() {
-
-//		currentShape = shapeRandomFactory().creatShape('?', tileSize, this);
-	
-
-	}
-
-	public void setCurrentShape() {
-
-		// ...
-
-	}
-
-	public void checkLine() {
-
-		// ...
-
-	}
-
 	public Shape getNextShape() {
-		return null;
+		return this.nextShape;
 	}
 
 	public Shape getCurrentShape() {
 		return this.currentShape;
 	}
-	
-	public void pause() {
-		pause=!pause;
-	}
 
-	
+	public void pause() {
+		pause = !pause;
+	}
 
 	public int[][] getBoard() {
 		return board;
 	}
 
 	public int getTileSize() {
-		// TODO Auto-generated method stub
 		return this.tileSize;
 	}
 	
+
+	public void resume() {
+		// ...
+	}
+
 }
