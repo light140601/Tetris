@@ -6,28 +6,25 @@ import model.IGame;
 
 public class ShapeRandomFactory {
 
-	public Shape creatShape(int x, int y, int size) {
+	public Shape creatShape(int size, IGame boardGame) {
 		//insert code
 		char result = this.creatShapeRandom();
 		switch (result) {
 		case 'J':
-			return new ShapeJ();
+			return new ShapeJ(size, boardGame);
 		case 'L':
-			return new ShapeL();
+			return new ShapeL(size, boardGame);
 		case 'O':
-			return new ShapeO();
+			return new ShapeO(size, boardGame);
 		case 'S':
 			return new ShapeS();
 		case 'T':
 			return new ShapeT();
 		case 'Z':
 			return new ShapeZ();
-
 		default:
-			break;
+			return null;
 		}
-		return null;
-		
 	}
 	public char creatShapeRandom() {
 		//insert code

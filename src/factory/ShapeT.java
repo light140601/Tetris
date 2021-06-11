@@ -4,32 +4,14 @@ import java.awt.BasicStroke;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
+import model.IGame;
+
 public class ShapeT extends Shape {
 
-	public ShapeT(int x, int y, int size) {
-		super(x, y, size);
-		// TODO Auto-generated constructor stub
-		this.create();
+	public ShapeT(int size, IGame boarGame) {
+		super(size, boarGame);
+		this.coords = new int[][] { { 1, 1, 1 }, { 0, 1, 0 } };
 		this.colorFlag = 5;
-	}
-
-	public ShapeT() {
-		// TODO Auto-generated constructor stub
-		this.create();
-		this.colorFlag = 5;
-	}
-
-	@Override
-	public void create() {
-		// TODO Auto-generated method stub
-		int[][] temp = { { 1, 1, 1 }, { 0, 1, 0 } };
-		this.coords = temp;
-	}
-
-	@Override
-	public void init() {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override

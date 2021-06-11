@@ -13,7 +13,7 @@ public abstract class Shape {
 	protected int y;
 	protected int[][] coords;
 	protected int size;
-	protected int normalSpeed = 200;
+	protected int normalSpeed = 600;
 	protected int downSpeed = 60;
 	protected int currentSpeed;
 	protected int detalX = 0;
@@ -22,31 +22,15 @@ public abstract class Shape {
 	protected IGame boarGame;
 	protected long time, lastTime;
 
-	public Shape(int x, int y, int size) {
-		// TODO Auto-generated constructor stub
-		this.currentSpeed = this.normalSpeed;
-		this.x = 4;
-		this.y = 0;
-		time = 0;
-		lastTime = 0;
-
-	}
-
-	public Shape() {
-		// TODO Auto-generated constructor stub
-		this.currentSpeed = this.normalSpeed;
-		this.x = 4;
-		this.y = 0;
+	public Shape(int size, IGame boarGame) {
+		this.size = size;
+		this.boarGame = boarGame;
+		currentSpeed = normalSpeed;
+		x = 4;
+		y = 0;
 		time = 0;
 		lastTime = 0;
 	}
-
-	//
-	public void init() {
-
-	}
-
-	public abstract void create();
 
 	public abstract void draw(Graphics g);
 
@@ -55,7 +39,6 @@ public abstract class Shape {
 		// insert code
 		time += System.currentTimeMillis() - lastTime;
 		lastTime = System.currentTimeMillis();
-		// đụng tường dưới r coi có ấy ko
 		if (collision) {
 			for (int row = 0; row < coords.length; row++) {
 				for (int col = 0; col < coords[row].length; col++) {
@@ -64,10 +47,9 @@ public abstract class Shape {
 					}
 				}
 			}
-			this.check();
-			this.boarGame.setNextShape();
+			boarGame.setCurrentShape();
+			boarGame.checkLine();
 		}
-		// nếu đã có shape r ko đc move r xếp chồng lên
 		if (!(x + this.detalX + coords[0].length > 10) && !(x + this.detalX < 0)) {
 			for (int row = 0; row < coords.length; row++) {
 				for (int col = 0; col < coords[row].length; col++) {
@@ -105,7 +87,7 @@ public abstract class Shape {
 		moveX = true;
 	}
 
-	// chuyển đổi
+	//xoay
 	public void rotate() {
 		// insert code
 		if (this.collision) {
@@ -129,23 +111,6 @@ public abstract class Shape {
 
 	}
 
-	// kieemr tra xong r bien mat
-	public void check() {
-		int height = this.boarGame.getBoard().length - 1;
-		for (int i = height; i > 0; i--) {
-			int count = 0;
-			for (int j = 0; j < this.boarGame.getBoard()[0].length; j++) {
-				if (this.boarGame.getBoard()[i][j] != 0) {
-					count++;
-				}
-				this.boarGame.getBoard()[height][j] = this.boarGame.getBoard()[i][j];
-			}
-			if (count < this.boarGame.getBoard()[0].length) {
-				height--;
-			}
-		}
-	}
-
 	public void left() {
 		// insert code
 		this.detalX = -1;
@@ -159,10 +124,9 @@ public abstract class Shape {
 	// time++
 	public void down() {
 		// insert code
-		this.normalSpeed++;
+		currentSpeed = downSpeed;
 	}
 
-	// đụng tường tình time của cai sau bình thường
 	public void setNormalSpeed() {
 		this.normalSpeed = 200;
 	}
@@ -176,7 +140,6 @@ public abstract class Shape {
 			input[input.length - i - 1] = temp;
 		}
 		return input;
-
 	}
 
 	// transpose

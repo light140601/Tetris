@@ -4,24 +4,14 @@ import java.awt.BasicStroke;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
+import model.IGame;
+
 public class ShapeO extends Shape{
 
-	public ShapeO(int x, int y, int size) {
-		super(x, y, size);
-		// TODO Auto-generated constructor stub
-		this.create();
+	public ShapeO(int size, IGame boarGame) {
+		super(size, boarGame);
+		this.coords = new int[][] {{1,1},{1,1}};
 		this.colorFlag = 3;
-	}
-	public ShapeO() {
-		// TODO Auto-generated constructor stub
-		this.create();
-		this.colorFlag = 3;
-	}
-
-	@Override 
-	public void create(){
-		int[][] temp = {{1,1},{1,1}};
-		this.coords = temp;
 	}
 	
 	@Override
