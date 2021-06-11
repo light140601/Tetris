@@ -20,7 +20,7 @@ public class Game extends Observable implements IGame {
 	}
 
 	public void init() {
-		// currentShape = new ShapeRandomFactory().creatShape(0, 0, tileSize); 
+		currentShape = new ShapeRandomFactory().creatShape(tileSize, this);
 	}
 
 	public void update() {
@@ -37,11 +37,11 @@ public class Game extends Observable implements IGame {
 	}
 
 	public void setNextShape() {
-		nextShape = new ShapeRandomFactory().creatShape(0, 0, tileSize);
+		nextShape = new ShapeRandomFactory().creatShape(tileSize, this);
 		for (int row = 0; row < currentShape.getCoords().length; row++) {
 			for (int col = 0; col < currentShape.getCoords()[row].length; col++) {
 				if (currentShape.getCoords()[row][col] != 0) {
-					if (board[row][col + 3] != 0) // +3
+					if (board[row][col + 3] != 0)
 						gameOver = true;
 				}
 			}
@@ -61,10 +61,10 @@ public class Game extends Observable implements IGame {
 				if (board[row][col] != 0) {
 					count++;
 				}
-				board[height][col] = board[row][col]; 
+				board[height][col] = board[row][col];
 			}
 			if (count < board[0].length)
-				height--; 
+				height--;
 		}
 
 	}
@@ -77,10 +77,6 @@ public class Game extends Observable implements IGame {
 		return this.currentShape;
 	}
 
-	public void pause() {
-		pause = !pause;
-	}
-
 	public int[][] getBoard() {
 		return board;
 	}
@@ -88,9 +84,34 @@ public class Game extends Observable implements IGame {
 	public int getTileSize() {
 		return this.tileSize;
 	}
-	
+
+	public void left() {
+		currentShape.left();
+	}
+
+	public void right() {
+		currentShape.right();
+
+	}
+
+	public void down() {
+		currentShape.down();
+	}
+
+	public void setNormalSpeed() {
+		currentShape.setNormalSpeed();
+	}
+
+	public void rotate() {
+		currentShape.rotate();
+	}
 
 	public void resume() {
+		// ...
+	}
+
+	public void pause() {
+		pause = !pause;
 		// ...
 	}
 
