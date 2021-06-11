@@ -1,6 +1,7 @@
 package view;
 
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -32,5 +33,9 @@ public class NextShapePanel extends JPanel implements Observer {
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
+		
+		Graphics2D g2d = (Graphics2D) g;
+		g2d.drawLine(0, 0, 100, 100);
+		
 	}
 }

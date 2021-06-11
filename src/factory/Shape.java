@@ -7,7 +7,6 @@ import java.awt.image.BufferedImage;
 import model.IGame;
 
 public abstract class Shape {
-	protected Color color;
 	protected int colorFlag;
 	protected int x;
 	protected int y;
@@ -31,8 +30,6 @@ public abstract class Shape {
 		time = 0;
 		lastTime = 0;
 	}
-
-	public abstract void draw(Graphics g);
 
 	// main
 	public void update() {
@@ -108,7 +105,6 @@ public abstract class Shape {
 			}
 			this.coords = temp;
 		}
-
 	}
 
 	public void left() {
@@ -178,4 +174,7 @@ public abstract class Shape {
 		return normalSpeed;
 	}
 
+	public void draw(Graphics g) {
+		
+	}
 }

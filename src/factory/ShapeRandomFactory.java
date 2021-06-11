@@ -17,11 +17,11 @@ public class ShapeRandomFactory {
 		case 'O':
 			return new ShapeO(size, boardGame);
 		case 'S':
-			return new ShapeS();
+			return new ShapeS(size, boardGame);
 		case 'T':
-			return new ShapeT();
+			return new ShapeT(size, boardGame);
 		case 'Z':
-			return new ShapeZ();
+			return new ShapeZ(size, boardGame);
 		default:
 			return null;
 		}
@@ -32,8 +32,5 @@ public class ShapeRandomFactory {
 		Random r = new Random();
 		int index = r.nextInt(icons.length);
 		return icons[index];
-	}
-	public static void main(String[] args) {
-		
 	}
 }

@@ -19,7 +19,6 @@ public class ShapeT extends Shape {
 		// TODO Auto-generated method stub
 		Graphics2D g2 = (Graphics2D) g;
 		g2.setStroke(new BasicStroke(2f));
-		g.setColor(color.CYAN);
 		for (int row = 0; row < coords.length; row++) {
 			for (int col = 0; col < coords[row].length; col++) {
 				if (coords[row][col] != 0)
