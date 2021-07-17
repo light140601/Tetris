@@ -115,7 +115,7 @@ public class PauseScreen extends JDialog implements IPause, MouseListener, Obser
 
 	@Override
 	public void backToHome() {
-		controller.backToHome();
+		if(controller.backToHome());
 		dispose();
 	}
 
