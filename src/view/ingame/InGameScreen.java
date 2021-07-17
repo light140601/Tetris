@@ -119,6 +119,7 @@ public class InGameScreen extends JFrame implements IInGame, KeyListener {
 	public void disposeIngame() {
 		this.dispose();
 	}
+	
 	@Override
 	public void keyTyped(KeyEvent e) {
 	}
