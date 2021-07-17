@@ -1,32 +1,31 @@
 package model;
 
-import java.awt.Graphics;
+import java.awt.Graphics2D;
 
-import factory.Shape;
+import obj.AShape;
 
 public interface IGame {
-	public void init();
-
-	public void update();
-
-	public void draw(Graphics g);
-
-	public Shape getNextShape();
-	public void setNextShape();
-	public void setCurrentShape();
-	public Shape getCurrentShape();
-	public void checkLine();
-
-	public int[][] getBoard();
-	public int getTileSize();
-
-	public void left();
-	public void right();
-	public void down();
-	public void setNormalSpeed();
-	public void rotate();
-	public void pause();
-
-	public void resume();
+	public static final int WIDTH = 14;
+	public static final int HEIGHT = 20;
+	public static final int TILE_SIZE = 35;
+	
+	public void update();//update game
+	public void left();//di chuyen shape sang trai
+	public void right();//di chuyen shape sang phai
+	public void down();//dua shape xuong 1 bac
+	public void setNormalSpeed();//dat lai toc do ban dau
+	public void rotate();//xoay
+	public void pause();//tam dung game
+	public void resume();//tiep tuc
+	public void start();//bat dau
+	public void setPlayer(String name);//set up ten nguoi choi
+	public void setStateBgMs();//bat tat nhac nen
+	public void setStateEffect();//bat tat effect
+	public void changeVolumeBgMs(int value);//thay doi am luong nhac nen
+	public void changeVolumeEffect(int value);//thay doi am luong effect
+	public void setInGame(boolean op);//thay doi trang thai ingame
+	public void tranlateEnglish();
+	public void tranlateVietnamese();
+	public void tranlateChinese();
 
 }

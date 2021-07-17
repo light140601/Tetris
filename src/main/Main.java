@@ -1,23 +1,52 @@
 package main;
 
-import java.awt.EventQueue;
+import controller.Controller;
+import controller.IController;
+import model.Game;
+import model.IGame;
 
-public class Main {
+public class Main implements Runnable {
+	private Thread thread;
+	private IGame game;
+	private IController controller;
+	private int fps = 30;
+	private int tagetTime = 1000 / fps;
 
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			
-			public void run() {
-				while(true) {
-					System.out.println(1);
-					try {
-						Thread.sleep(1000);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-				}
-			}
-		});
+	public Main() {
+		game = new Game();
+		controller = new Controller(game);
+		
+		if (thread == null) {
+			thread = new Thread(this);
+			thread.start();
+		}
 	}
 
+	@Override
+	public void run() {
+
+		long startTime;
+		int delay;
+
+		while (true) {
+			startTime = System.nanoTime();
+
+			game.update();
+			
+			delay = tagetTime - (int) ((System.nanoTime() - startTime) / 1000000);
+			if (delay < 0)
+				delay = 30;
+			
+			try {
+				Thread.sleep(delay);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+
+	}
+
+	public static void main(String[] args) {
+		new Main();
+	}
 }

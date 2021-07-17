@@ -2,33 +2,43 @@ package factory;
 
 import java.util.Random;
 
-import model.IGame;
+import model.Game;
+import obj.AShape;
+import obj.ShapeI;
+import obj.ShapeJ;
+import obj.ShapeL;
+import obj.ShapeO;
+import obj.ShapeS;
+import obj.ShapeT;
+import obj.ShapeZ;
 
-public class ShapeRandomFactory {
+public class ShapeRandomFactory implements IShapeFactory{
 
-	public Shape creatShape(int size, IGame boardGame) {
-		//insert code
+	@Override
+	public AShape creatShape(Game game) {
 		char result = this.creatShapeRandom();
 		switch (result) {
 		case 'J':
-			return new ShapeJ(size, boardGame);
+			return new ShapeJ(game);
 		case 'L':
-			return new ShapeL(size, boardGame);
+			return new ShapeL(game);
 		case 'O':
-			return new ShapeO(size, boardGame);
+			return new ShapeO(game);
 		case 'S':
-			return new ShapeS(size, boardGame);
+			return new ShapeS(game);
 		case 'T':
-			return new ShapeT(size, boardGame);
+			return new ShapeT(game);
 		case 'Z':
-			return new ShapeZ(size, boardGame);
+			return new ShapeZ(game);
+		case 'I':
+			return new ShapeI(game);
 		default:
 			return null;
 		}
 	}
+	
 	public char creatShapeRandom() {
-		//insert code
-		char[] icons = {'J', 'L', 'O', 'S', 'T', 'Z'};
+		char[] icons = {'J', 'L', 'O', 'S', 'T', 'Z', 'I'};
 		Random r = new Random();
 		int index = r.nextInt(icons.length);
 		return icons[index];

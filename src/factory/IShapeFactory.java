@@ -1,7 +1,8 @@
 package factory;
 
-import model.IGame;
+import model.Game;
+import obj.AShape;
 
 public interface IShapeFactory {
-	public Shape creatShape(int x, int y, int size );
+	public AShape creatShape(Game game);
 }
