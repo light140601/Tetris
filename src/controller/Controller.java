@@ -134,9 +134,8 @@ public class Controller implements IController {
 			
 			return true;
 		} else {
-			model.resume();
-
 			if (!pause.isShow()) {
+				model.resume();
 				inGame.requestFocus();
 			}
 			return false;
